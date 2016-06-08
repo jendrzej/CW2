@@ -51,10 +51,19 @@ public class Metryka {
         double sredniaTst=sredniaListy(tst);
         double sredniaTrn=sredniaListy(trn);
         for(int i=0;i<tst.size();i++){
-            //TODO
+            wynik+=((tst.get(i).wartosc-sredniaTst)/PearsonaLMianownik(tst,sredniaTst))
+                * ((trn.get(i).wartosc-sredniaTrn)/PearsonaLMianownik(trn,sredniaTrn));
         }
 
-        return wynik;
+        return 1-wynik/tst.size();
+    }
+
+    double PearsonaLMianownik(ArrayList<Deskryptor> lista, double sredniaListy){
+        double wynik=0;
+        for (Deskryptor d:lista) {
+            wynik+= Math.pow(d.wartosc + sredniaListy(lista),2);
+        }
+        return Math.sqrt(wynik/lista.size());
     }
 
     double sredniaListy(ArrayList<Deskryptor> lista)
